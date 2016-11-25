@@ -1,0 +1,99 @@
+#!/bin/bash
+##Move to /home directory
+echo "Changing Directory..."
+cd
+#
+
+##Ruby and git
+echo "Installing ruby and git"
+sudo apt-get install git ruby -y > /dev/null
+#
+
+##Fix possible previous attempts to install metasploit/armitage
+echo "Fixing possible previous mistakes... (no offense)"
+sudo apt-get remove metasploit-framework postgresql --purge -y > /dev/null
+if [ -d /opt/metasploit-framework ]
+then
+sudo rm -r /opt/metasploit-framework > /dev/null
+fi
+if [ -d /opt/armitage ]
+then
+sudo rm -r /opt/armitage > /dev/null
+fi
+if [ -d /usr/local/bin/armitage ]
+then
+sudo rm -r /usr/local/bin/armitage > /dev/null
+fi
+if [ -d /usr/local/bin/teamserver ]
+then
+sudo rm -r /usr/local/bin/teamserver > /dev/null
+fi
+#
+
+
+##Install metasploit
+echo "Installing Metasploit-Framework... (This may take some time)"
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+echo "Doing other Metasploit installation requirement things" && \
+  chmod 755 msfinstall && \
+  ./msfinstall > /dev/null
+#
+
+##install postgres
+echo "Installing postgres... (If not already installed)"
+sudo apt-get install postgresql -y > /dev/null
+#
+
+##Install java
+echo "Installing java..."
+sudo add-apt-repository -y ppa:webupd8team/java -y > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get -y install oracle-java8-installer -y > /dev/null
+#
+
+##Setup postgres server
+#Thanks kerframil!
+echo "Setting up Postgres server..."
+sudo -u postgres 'createuser msf -P -S -R -D
+createdb -O msf msf' > /dev/null
+#
+
+##Man install armitage
+echo "Installing Armitage..."
+curl -# -o /tmp/armitage.tgz http://www.fastandeasyhacking.com/download/armitage150813.tgz > /dev/null
+sudo tar -xvzf /tmp/armitage.tgz -C /opt > /dev/null
+if [ -d /usr/local/bin/armitage ]
+then
+else
+sudo ln -s /opt/armitage/armitage /usr/local/bin/armitage > /dev/null
+fi
+if [ -d /usr/local/bin/teamserver ]
+then
+else
+sudo ln -s /opt/armitage/teamserver /usr/local/bin/teamserver > /dev/null
+fi
+sudo sh -c "echo java -jar /opt/armitage/armitage.jar \$\* > /opt/armitage/armitage" > /dev/null
+sudo perl -pi -e 's/armitage.jar/\/opt\/armitage\/armitage.jar/g' /opt/armitage/teamserver > /dev/null
+#
+
+##Create database.yml file
+echo "Creating database.yml file..."
+mkdir /opt/metasploit-framework/config > /dev/null
+echo "production:
+ adapter: postgresql
+ database: msf
+ username: msf
+ password: root
+ host: 127.0.0.1
+ port: 5432
+ pool: 75
+ timeout: 5" >> /opt/metasploit-framework/config/database.yml
+sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile" > /dev/null
+source /etc/profile > /dev/null
+#
+
+##Thank the user
+echo "So... That should be it, run 'sudo -E armitage' to start armitage and 'sudo msfconsole' to start metasploit"
+echo "Thanks for using my program!"
+echo "-Matt"
+#
