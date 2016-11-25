@@ -78,8 +78,8 @@ sudo perl -pi -e 's/armitage.jar/\/opt\/armitage\/armitage.jar/g' /opt/armitage/
 
 ##Create database.yml file
 echo "Creating database.yml file..."
-mkdir /opt/metasploit-framework/config > /dev/null
-echo "production:
+sudo mkdir /opt/metasploit-framework/config > /dev/null
+sudo echo "production:
  adapter: postgresql
  database: msf
  username: msf
@@ -88,7 +88,7 @@ echo "production:
  port: 5432
  pool: 75
  timeout: 5" >> /opt/metasploit-framework/config/database.yml
-sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile" > /dev/null
+sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile"
 source /etc/profile > /dev/null
 #
 
