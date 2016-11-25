@@ -1,0 +1,16 @@
+This is a program that will install Metasploit-Framework and Armitage on to Ubuntu, though I assume it will work on any Debian-based Linux Distro.
+This was made using a combonation of my own code, darkoperator's, and a nightly Metasploit installer from rapid7. 
+Please enjoy this program and how easy it is to install these tools using it.
+
+In order to run this program navigate to the folder it is in and type the following into a terminal:
+
+chmod +x NinjaArmInstall && sudo bash NinjaArmInstall
+
+
+
+After the script has completed, you can start a Metasploit console by typing sudo msfconsole. 
+To start Armitage type sudo -E armitage.
+
+Thank you so much for using my code!
+
+I disclaim ALL responsibility for what you do with the programs that this code will install.
