@@ -12,22 +12,10 @@ sudo apt-get install git ruby -y > /dev/null
 ##Fix possible previous attempts to install metasploit/armitage
 echo "Fixing possible previous mistakes... (no offense)"
 sudo apt-get remove metasploit-framework postgresql --purge -y > /dev/null
-if [ -d /opt/metasploit-framework ]
-then
 sudo rm -r /opt/metasploit-framework > /dev/null
-fi
-if [ -d /opt/armitage ]
-then
 sudo rm -r /opt/armitage > /dev/null
-fi
-if [ -d /usr/local/bin/armitage ]
-then
 sudo rm -r /usr/local/bin/armitage > /dev/null
-fi
-if [ -d /usr/local/bin/teamserver ]
-then
 sudo rm -r /usr/local/bin/teamserver > /dev/null
-fi
 #
 
 
@@ -54,24 +42,16 @@ sudo apt-get -y install oracle-java8-installer -y > /dev/null
 ##Setup postgres server
 #Thanks kerframil!
 echo "Setting up Postgres server..."
-sudo -u postgres 'createuser msf -P -S -R -D
-createdb -O msf msf' > /dev/null
+sudo -u postgres 'createuser msf -P -S -R -D' > /dev/null
+sudo -u postgres 'createdb -O msf msf' > /dev/null
 #
 
 ##Man install armitage
 echo "Installing Armitage..."
 curl -# -o /tmp/armitage.tgz http://www.fastandeasyhacking.com/download/armitage150813.tgz > /dev/null
 sudo tar -xvzf /tmp/armitage.tgz -C /opt > /dev/null
-if [ -d /usr/local/bin/armitage ]
-then
-else
 sudo ln -s /opt/armitage/armitage /usr/local/bin/armitage > /dev/null
-fi
-if [ -d /usr/local/bin/teamserver ]
-then
-else
 sudo ln -s /opt/armitage/teamserver /usr/local/bin/teamserver > /dev/null
-fi
 sudo sh -c "echo java -jar /opt/armitage/armitage.jar \$\* > /opt/armitage/armitage" > /dev/null
 sudo perl -pi -e 's/armitage.jar/\/opt\/armitage\/armitage.jar/g' /opt/armitage/teamserver > /dev/null
 #
