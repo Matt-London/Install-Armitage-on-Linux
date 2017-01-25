@@ -11,6 +11,8 @@ sudo apt-get install git ruby nmap -y > /dev/null
 
 ##Fix possible previous attempts to install metasploit/armitage
 echo "Fixing possible previous mistakes... (no offense)"
+echo "File does not exist errors are common here, this just means you haven't installed Metasploit previously."
+echo "Those errors will not impact the install."
 sudo apt-get remove metasploit-framework postgresql --purge -y > /dev/null
 sudo rm -r /opt/metasploit-framework > /dev/null
 sudo rm -r /opt/armitage > /dev/null
@@ -70,6 +72,7 @@ sudo echo "production:
  timeout: 5" >> /opt/metasploit-framework/config/database.yml
 sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile"
 source /etc/profile > /dev/null
+sudo chown -R `whoami` ~/.msf4
 #
 
 ##Thank the user
