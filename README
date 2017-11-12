@@ -4,7 +4,7 @@ Please enjoy this program and how easy it is to install these tools using it.
 
 In order to run this program navigate to the folder it is in and type the following into a terminal:
 
-chmod +x NinjaArmInstall && sudo bash NinjaArmInstall
+chmod +x ArmitageInstaller && sudo bash ArmitageInstaller
 
 
 
