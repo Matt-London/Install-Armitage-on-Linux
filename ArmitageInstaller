@@ -23,10 +23,10 @@ sudo rm -r /usr/local/bin/teamserver > /dev/null
 
 ##Install metasploit
 echo "Installing Metasploit-Framework... (This may take some time)"
+echo "Doing other Metasploit installation requirement things... (This WILL take some time)"
 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
-echo "Doing other Metasploit installation requirement things... (This WILL take some time)" && \
-  chmod 755 msfinstall && \
-  ./msfinstall > /dev/null
+chmod 755 msfinstall && \
+./msfinstall
 #
 
 ##install postgres
