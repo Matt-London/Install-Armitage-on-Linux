@@ -18,7 +18,7 @@ sudo rm -r /opt/metasploit-framework > /dev/null
 sudo rm -r /opt/armitage > /dev/null
 sudo rm -r /usr/local/bin/armitage > /dev/null
 sudo rm -r /usr/local/bin/teamserver > /dev/null
-#
+
 
 
 ##Install metasploit
@@ -30,22 +30,22 @@ chmod 755 msfinstall && \
 #
 
 ##install postgres
-echo "Installing postgres... (If not already installed)"
-sudo apt-get install postgresql -y > /dev/null
+#echo "Installing postgres... (If not already installed)"
+#sudo apt-get install postgresql -y > /dev/null
 #
 
 ##Install java
-echo "Installing java..."
-sudo add-apt-repository -y ppa:webupd8team/java -y > /dev/null
-sudo apt-get update > /dev/null
-sudo apt-get -y install oracle-java8-installer -y > /dev/null
+#echo "Installing java..."
+#sudo add-apt-repository -y ppa:webupd8team/java -y > /dev/null
+#sudo apt-get update > /dev/null
+#sudo apt-get -y install oracle-java8-installer -y > /dev/null
 #
 
 ##Setup postgres server
 #Thanks kerframil!
-echo "Setting up Postgres server..."
-sudo -u postgres 'createuser msf -P -S -R -D' > /dev/null
-sudo -u postgres 'createdb -O msf msf' > /dev/null
+#echo "Setting up Postgres server..."
+#sudo -u postgres 'createuser msf -P -S -R -D' > /dev/null
+#sudo -u postgres 'createdb -O msf msf' > /dev/null
 #
 
 ##Man install armitage
@@ -59,18 +59,18 @@ sudo perl -pi -e 's/armitage.jar/\/opt\/armitage\/armitage.jar/g' /opt/armitage/
 #
 
 ##Create database.yml file
-echo "Creating database.yml file..."
-sudo mkdir /opt/metasploit-framework/config > /dev/null
-sudo echo "production:
- adapter: postgresql
- database: msf
- username: msf
- password: root
- host: 127.0.0.1
- port: 5432
- pool: 75
- timeout: 5" >> /opt/metasploit-framework/config/database.yml
-sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile"
+#echo "Creating database.yml file..."
+#sudo mkdir /opt/metasploit-framework/config > /dev/null
+#sudo echo "production:
+# adapter: postgresql
+# database: msf
+# username: msf
+# password: root
+# host: 127.0.0.1
+# port: 5432
+# pool: 75
+# timeout: 5" >> /opt/metasploit-framework/config/database.yml
+sudo sh -c "echo export MSF_DATABASE_CONFIG=~/.msf4/database.yml >> /etc/profile"
 source /etc/profile > /dev/null
 sudo chown -R `whoami` ~/.msf4
 #
