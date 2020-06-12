@@ -1,5 +1,5 @@
 This is a program that will install Metasploit-Framework and Armitage on to Ubuntu, though I assume it will work on any Debian-based Linux Distro.
-This was made using a combination of my own code, darkoperator's, and a nightly Metasploit installer from rapid7. 
+This was made using a combination of my own code, darkoperator's, a nightly Metasploit installer from rapid7, and an update pull request from itsdarklikehell. 
 Please enjoy this program.
 
 In order to run this program navigate to the folder it is in and type the following into a terminal:
