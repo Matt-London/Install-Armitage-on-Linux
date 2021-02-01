@@ -48,6 +48,5 @@ sudo chown -R `whoami` ~/.msf4
 ##Thank the user
 echo "So... That should be it, run 'sudo -E armitage' to start armitage and 'sudo msfconsole' to start metasploit"
 echo "Thanks for using my program!"
-echo "Written by Matt-London"
-echo "Modern update credit to itsdarklikehell"
+echo "Written by https://github.com/matt-london"
 #
