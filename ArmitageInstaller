@@ -6,7 +6,7 @@ cd
 
 ##Ruby and git
 echo "Installing dependencies"
-sudo apt-get install git ruby nmap -y > /dev/null
+sudo apt-get install git ruby nmap curl -y > /dev/null
 #
 
 ##Fix possible previous attempts to install metasploit/armitage
